@@ -17,8 +17,8 @@ steps:
 - name: deploy-to-firebase
     image: node:16
     environment:
-      FIREBASE_TOKEN: 1//09yis-h9DDMyPCgYIARAAGAkSNwF-L9Iryv2VpMnehBjVHUq-3WFomFDlWChMspbRvN7qUAifb2rpu89yN8wSyOWRG3gdoNLU7PU
-      FIREBASE_PROJECT_ID: deploy-17f14
+      FIREBASE_TOKEN: "1//09yis-h9DDMyPCgYIARAAGAkSNwF-L9Iryv2VpMnehBjVHUq-3WFomFDlWChMspbRvN7qUAifb2rpu89yN8wSyOWRG3gdoNLU7PU"
+      FIREBASE_PROJECT_ID: "deploy-17f14"
     commands:
       - firebase use --add $FIREBASE_PROJECT_ID
       - firebase deploy --token $FIREBASE_TOKEN
