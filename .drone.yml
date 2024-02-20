@@ -14,24 +14,11 @@ steps:
     - cd drone_deploy
     - npm run build
 
-- name: copy_artifacts
-  image: alpine:3.14
-  commands:
-    - cd drone_deploy
-    - cp -r dist/* /drone/src/
-
-- name: debug_before_push
-  image: alpine:3.14
-  commands:
-    - ls -a /drone/src/
-
-- name: git-push
-  image: appleboy/drone-git-push
-  settings:
-    branch: master
-    remote: git@github.com:theend7/drone_deploy_test.git
-    force: false
-    commit: true
-    commit_message: test
-    author_name: Darko
-    author_email: darko.vulicevic98@gmail.com
+- name: deploy-to-firebase
+    image: node:16
+    environment:
+      FIREBASE_TOKEN: 1//09yis-h9DDMyPCgYIARAAGAkSNwF-L9Iryv2VpMnehBjVHUq-3WFomFDlWChMspbRvN7qUAifb2rpu89yN8wSyOWRG3gdoNLU7PU
+      FIREBASE_PROJECT_ID: deploy-17f14
+    commands:
+      - firebase use --add $FIREBASE_PROJECT_ID
+      - firebase deploy --token $FIREBASE_TOKEN
