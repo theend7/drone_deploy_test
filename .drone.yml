@@ -5,12 +5,12 @@ steps:
 - name: install_dependencies
   image: node:16  # Replace with the appropriate Node.js version
   commands:
-    - cd drone_deploy_test
+    - cd drone_deploy
     - npm install
 - name: build
   image: node:16  # Replace with your build image
   commands:
-    - cd drone_deploy_test
+    - cd drone_deploy
     - npm run build
 - name: copy_artifacts
   image: alpine:3.14
