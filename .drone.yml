@@ -5,13 +5,13 @@ steps:
   - name: install-dependencies
     image: node:14
     commands:
-      - cd drone_deploy_test
+      - cd drone_deploy
       - npm install
 
   - name: build-angular-app
     image: node:14
     commands:
-      - cd drone_deploy_test
+      - cd drone_deploy
       - npm run build
 
   - name: deploy-to-firebase
