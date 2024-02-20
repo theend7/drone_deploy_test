@@ -1,0 +1,38 @@
+kind: pipeline
+type: docker
+name: build_and_push
+steps:
+- name: install_dependencies
+  image: node:16  # Replace with the appropriate Node.js version
+  commands:
+    - cd drone_deploy_test
+    - npm install
+- name: build
+  image: node:16  # Replace with your build image
+  commands:
+    - cd drone_deploy_test
+    - npm run build
+- name: copy_artifacts
+  image: alpine:3.14
+  commands:
+    - cd drone_deploy_test
+    - cp -r dist/* /drone/src/
+- name: debug_before_push
+  image: alpine:3.14
+  commands:
+    - ls -a /drone/src/
+- name: debug_ssh_agent
+  image: alpine:3.14
+  commands:
+    - cat id_rsa_personal.pub
+    - env | grep SSH
+- name: git-push
+  image: appleboy/drone-git-push
+  settings:
+    branch: master
+    remote: git@github.com:theend7/drone_deploy_test.git
+    force: false
+    commit: true
+    commit_message: test
+    author_name: Darko
+    author_email: darko.vulicevic98@gmail.com
