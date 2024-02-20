@@ -7,25 +7,30 @@ steps:
   commands:
     - cd drone_deploy
     - npm install
+
 - name: build
   image: node:16  # Replace with your build image
   commands:
     - cd drone_deploy
     - npm run build
+
 - name: copy_artifacts
   image: alpine:3.14
   commands:
-    - cd drone_deploy_test
+    - cd drone_deploy
     - cp -r dist/* /drone/src/
+
 - name: debug_before_push
   image: alpine:3.14
   commands:
     - ls -a /drone/src/
+
 - name: debug_ssh_agent
   image: alpine:3.14
   commands:
     - cat id_rsa_personal.pub
     - env | grep SSH
+    
 - name: git-push
   image: appleboy/drone-git-push
   settings:
