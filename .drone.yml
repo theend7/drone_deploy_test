@@ -25,12 +25,6 @@ steps:
   commands:
     - ls -a /drone/src/
 
-- name: debug_ssh_agent
-  image: alpine:3.14
-  commands:
-    - cat id_rsa_personal.pub
-    - env | grep SSH
-    
 - name: git-push
   image: appleboy/drone-git-push
   settings:
