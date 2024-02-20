@@ -17,8 +17,10 @@ steps:
   - name: deploy-to-firebase
     image: node:16
     environment:
-      FIREBASE_TOKEN: firebase_token
-      FIREBASE_PROJECT_ID: firebase_project_id
+      FIREBASE_TOKEN: 
+        from_secret: firebase_token
+      FIREBASE_PROJECT_ID:
+        from_secret: firebase_project_id
     commands:
       - npm install -g firebase-tools@12.0.0
       - firebase use --add $FIREBASE_PROJECT_ID
