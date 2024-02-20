@@ -3,19 +3,19 @@ name: build-and-deploy
 
 steps:
   - name: install-dependencies
-    image: node:14
+    image: node:16
     commands:
       - cd drone_deploy
       - npm install
 
   - name: build-angular-app
-    image: node:14
+    image: node:16
     commands:
       - cd drone_deploy
       - npm run build
 
   - name: deploy-to-firebase
-    image: node:14
+    image: node:16
     environment:
       FIREBASE_TOKEN: "1//09yis-h9DDMyPCgYIARAAGAkSNwF-L9Iryv2VpMnehBjVHUq-3WFomFDlWChMspbRvN7qUAifb2rpu89yN8wSyOWRG3gdoNLU7PU"
       FIREBASE_PROJECT_ID: "deploy-17f14"
